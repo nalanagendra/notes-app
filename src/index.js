@@ -8,12 +8,6 @@ import configureStore from "./store/store";
 
 const store = configureStore();
 
-store.subscribe(() => {
-  console.log("connected successfully");
-});
-
-console.log("React index js", store.getState());
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
