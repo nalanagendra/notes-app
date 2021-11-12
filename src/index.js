@@ -2,10 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+
+import configureStore from "./store/store";
+
+const store = configureStore();
+
+store.subscribe(() => {
+  console.log("connected successfully");
+});
+
+console.log("React index js", store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
