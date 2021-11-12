@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+
+import { startUserLogin } from "../../actions/userActions";
 
 const initialValues = {
   email: "",
@@ -12,14 +16,27 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Required!!"),
 });
 
-const onSubmit = (values) => {
-  console.log(values);
-};
-
 const Login = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const message = useSelector((state) => state.user.message);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+
+  const onSubmit = (values) => {
+    dispatch(startUserLogin(values, redirectToHome));
+  };
+
+  const redirectToHome = () => {
+    navigate("/");
+  };
+
   return (
     <div>
-      <h2>Login component</h2>
+      <h2>Login</h2>
+      {isLoading && <div>Logging in...</div>}
+      {message && <div>{message}</div>}
+      {errorMessage && <div>{errorMessage}</div>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
