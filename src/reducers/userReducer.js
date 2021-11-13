@@ -8,10 +8,15 @@ const initialUsersData = {
 const userReducer = (state = initialUsersData, action) => {
   switch (action.type) {
     case "USER_LOGIN_REQUEST": {
-      return { ...state, errorMessage: "", isLoading: true, message: "" };
+      return {
+        ...state,
+        errorMessage: "",
+        isLoading: true,
+        message: "Logging in...",
+      };
     }
 
-    case "USER_LOGIN_REQUEST_SUCCESS": {
+    case "USER_LOGIN_SUCCESS": {
       return {
         ...state,
         errorMessage: "",
@@ -21,7 +26,7 @@ const userReducer = (state = initialUsersData, action) => {
       };
     }
 
-    case "USER_LOGIN_REQUEST_ERROR": {
+    case "USER_LOGIN_ERROR": {
       return {
         ...state,
         errorMessage: action.payload,
@@ -37,6 +42,36 @@ const userReducer = (state = initialUsersData, action) => {
         isLoading: false,
         errorMessage: "",
         message: "Loggedout successfully",
+        isLoggedIn: false,
+      };
+    }
+
+    case "USER_REGISTER_REQUEST": {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: "",
+        message: "Registering...",
+        isLoggedIn: false,
+      };
+    }
+
+    case "USER_REGISTER_SUCCESS": {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: "",
+        message: "Registered Successfully.",
+        isLoggedIn: false,
+      };
+    }
+
+    case "USER_REGISTER_ERROR": {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload,
+        message: "",
         isLoggedIn: false,
       };
     }

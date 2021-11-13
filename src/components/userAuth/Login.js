@@ -19,7 +19,6 @@ const validationSchema = Yup.object({
 const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoading = useSelector((state) => state.user.isLoading);
   const message = useSelector((state) => state.user.message);
   const errorMessage = useSelector((state) => state.user.errorMessage);
 
@@ -34,7 +33,6 @@ const Login = (props) => {
   return (
     <div>
       <h2>Login</h2>
-      {isLoading && <div>Logging in...</div>}
       {message && <div>{message}</div>}
       {errorMessage && <div>{errorMessage}</div>}
       <Formik

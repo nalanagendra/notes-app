@@ -1,6 +1,10 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { startUserRegisterRequest } from "../../actions/userActions";
 
 const initialValues = {
   username: "",
@@ -23,14 +27,25 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.user.message);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+
   const onSubmit = (values) => {
     values.username = values.username.trim();
-    console.log(values);
+    dispatch(startUserRegisterRequest(values, redirectToLogin));
+  };
+
+  const redirectToLogin = () => {
+    navigate("/login");
   };
 
   return (
     <div>
       <h2>Register with us</h2>
+      {message && <div>{message}</div>}
+      {errorMessage && <div>{errorMessage}</div>}
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
