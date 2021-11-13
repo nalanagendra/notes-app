@@ -1,15 +1,20 @@
 import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import Home from "./Home";
 import Login from "./userAuth/Login";
 import Register from "./userAuth/Register";
 import Account from "./userAuth/Account";
-import Logout from "./userAuth/Logout";
+import { userLogout } from "../actions/userActions";
 
 const NavBar = (props) => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+  };
 
   return (
     <div>
@@ -23,7 +28,9 @@ const NavBar = (props) => {
               <Link to="/account">Account</Link>
             </li>
             <li>
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout" onClick={handleLogout}>
+                Logout
+              </Link>
             </li>
           </React.Fragment>
         ) : (
@@ -43,7 +50,7 @@ const NavBar = (props) => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/logout" element={<Navigate replace to="/" />} />
       </Routes>
     </div>
   );

@@ -30,6 +30,17 @@ const userReducer = (state = initialUsersData, action) => {
       };
     }
 
+    case "USER_LOGOUT": {
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: "",
+        message: "Loggedout successfully",
+        isLoggedIn: false,
+      };
+    }
+
     default: {
       if (localStorage.getItem("token")) {
         return {

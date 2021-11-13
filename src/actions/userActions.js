@@ -38,3 +38,9 @@ const userLoginRequestError = (errorMessage) => {
     payload: errorMessage,
   };
 };
+
+export const userLogout = () => {
+  return {
+    type: "USER_LOGOUT",
+  };
+};
