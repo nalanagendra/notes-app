@@ -74,3 +74,25 @@ const getNotesError = () => {
     type: "GET_NOTES_ERROR",
   };
 };
+
+export const startDeleteNote = (_id) => {
+  return (dispatch) => {
+    axios
+      .delete(`https://dct-user-auth.herokuapp.com/api/notes/${_id}`, {
+        headers: {
+          "x-auth": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        dispatch(deleteNoteSuccess(response.data));
+      })
+      .catch((error) => {});
+  };
+};
+
+const deleteNoteSuccess = (note) => {
+  return {
+    type: "DELETE_NOTE_SUCCESS",
+    payload: note,
+  };
+};

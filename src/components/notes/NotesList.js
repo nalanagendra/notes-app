@@ -11,6 +11,9 @@ const NoteList = (props) => {
       return { ...note };
     })
   );
+  const isLoading = useSelector((state) => state.notes.isLoading);
+  const errorMessage = useSelector((state) => state.notes.errorMessage);
+  const message = useSelector((state) => state.notes.message);
 
   useEffect(() => {
     dispatch(startGetNotes());
@@ -18,9 +21,16 @@ const NoteList = (props) => {
 
   return (
     <div>
-      {notes.map((note) => (
-        <NoteItem key={note._id} {...note} />
-      ))}
+      {isLoading ? <div>Loading ...</div> : null}
+      {message && <div>{message}</div>}
+      {!isLoading && notes.length === 0 && (
+        <div>Please add your first note</div>
+      )}
+      {!errorMessage && !isLoading ? (
+        notes.map((note) => <NoteItem key={note._id} {...note} />)
+      ) : (
+        <div>{errorMessage}</div>
+      )}
     </div>
   );
 };

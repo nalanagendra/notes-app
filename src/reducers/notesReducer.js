@@ -10,7 +10,6 @@ const notesReducer = (state = initialNotesState, action) => {
     case "ADD_NOTE_REQUEST": {
       return {
         ...state,
-        notes: [],
         message: "Adding note",
         errorMessage: "",
         isLoading: false,
@@ -20,7 +19,7 @@ const notesReducer = (state = initialNotesState, action) => {
     case "ADD_NOTE_SUCCESS": {
       return {
         ...state,
-        notes: [action.payload, ...state.notes],
+        notes: [...state.notes, action.payload],
         message: "Note added Successfully",
         errorMessage: "",
         isLoading: false,
@@ -52,7 +51,7 @@ const notesReducer = (state = initialNotesState, action) => {
         ...state,
         notes: [...action.payload],
         errorMessage: "",
-        message: "",
+        message: "Notes loaded successfully",
         isLoading: false,
       };
     }
@@ -62,6 +61,19 @@ const notesReducer = (state = initialNotesState, action) => {
         ...state,
         notes: [],
         errorMessage: "Something went wrong",
+        message: "",
+        isLoading: false,
+      };
+    }
+
+    case "DELETE_NOTE_SUCCESS": {
+      const filteredNotes = state.notes.filter(
+        (note) => note._id !== action.payload._id
+      );
+      return {
+        ...state,
+        notes: [...filteredNotes],
+        errorMessage: "",
         message: "",
         isLoading: false,
       };
