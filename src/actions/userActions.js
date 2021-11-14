@@ -82,3 +82,41 @@ const userRegisterError = (errorMessage) => {
     payload: errorMessage,
   };
 };
+
+export const startFetchAccountInfo = () => {
+  return (dispatch) => {
+    dispatch(fetchAccountInfoRequest());
+    axios
+      .get("https://dct-user-auth.herokuapp.com/users/account", {
+        headers: {
+          "x-auth": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        dispatch(fetchAccountInfoSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchAccountInfoError(error.message));
+      });
+  };
+};
+
+const fetchAccountInfoRequest = () => {
+  return {
+    type: "FETCH_ACCOUNT_INFO_REQUEST",
+  };
+};
+
+const fetchAccountInfoSuccess = (accountData) => {
+  return {
+    type: "FETCH_ACCOUNT_INFO_SUCCESS",
+    payload: accountData,
+  };
+};
+
+const fetchAccountInfoError = (errorMessage) => {
+  return {
+    type: "FETCH_ACCOUNT_INFO_ERROR",
+    payload: errorMessage,
+  };
+};

@@ -3,6 +3,7 @@ const initialUsersData = {
   errorMessage: "",
   message: "",
   isLoggedIn: false,
+  data: {},
 };
 
 const userReducer = (state = initialUsersData, action) => {
@@ -73,6 +74,35 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: action.payload,
         message: "",
         isLoggedIn: false,
+      };
+    }
+
+    case "FETCH_ACCOUNT_INFO_REQUEST": {
+      return {
+        ...state,
+        isLoading: true,
+        message: "",
+        errorMessage: "",
+      };
+    }
+
+    case "FETCH_ACCOUNT_INFO_SUCCESS": {
+      return {
+        ...state,
+        isLoading: false,
+        message: "Account information loaded successfully",
+        errorMessage: "",
+        data: { ...action.payload },
+      };
+    }
+
+    case "FETCH_ACCOUNT_INFO_ERROR": {
+      return {
+        ...state,
+        isLoading: false,
+        message: "",
+        errorMessage: action.payload,
+        data: {},
       };
     }
 
