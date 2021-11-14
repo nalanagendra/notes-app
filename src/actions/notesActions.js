@@ -37,3 +37,40 @@ const addnoteError = () => {
     type: "ADD_NOTE_ERROR",
   };
 };
+
+export const startGetNotes = () => {
+  return (dispatch) => {
+    dispatch(getNotesRequest());
+    axios
+      .get("https://dct-user-auth.herokuapp.com/api/notes", {
+        headers: {
+          "x-auth": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        dispatch(getNotesSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(getNotesError());
+      });
+  };
+};
+
+const getNotesRequest = () => {
+  return {
+    type: "GET_NOTES_REQUEST",
+  };
+};
+
+const getNotesSuccess = (notes) => {
+  return {
+    type: "GET_NOTES_SUCCESS",
+    payload: notes,
+  };
+};
+
+const getNotesError = () => {
+  return {
+    type: "GET_NOTES_ERROR",
+  };
+};

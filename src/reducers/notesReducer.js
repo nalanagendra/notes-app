@@ -37,6 +37,36 @@ const notesReducer = (state = initialNotesState, action) => {
       };
     }
 
+    case "GET_NOTES_REQUEST": {
+      return {
+        ...state,
+        notes: [],
+        message: "",
+        errorMessage: "",
+        isLoading: true,
+      };
+    }
+
+    case "GET_NOTES_SUCCESS": {
+      return {
+        ...state,
+        notes: [...action.payload],
+        errorMessage: "",
+        message: "",
+        isLoading: false,
+      };
+    }
+
+    case "GET_NOTES_ERROR": {
+      return {
+        ...state,
+        notes: [],
+        errorMessage: "Something went wrong",
+        message: "",
+        isLoading: false,
+      };
+    }
+
     default: {
       return {
         notes: [...state.notes],

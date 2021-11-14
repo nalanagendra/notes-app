@@ -18,7 +18,6 @@ const NoteForm = (props) => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.notes.message);
   const errorMessage = useSelector((state) => state.notes.errorMessage);
-  console.log(message);
 
   const onSubmit = (values, { resetForm }) => {
     dispatch(startAddNote(values, resetForm));
