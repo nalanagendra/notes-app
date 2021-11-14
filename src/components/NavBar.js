@@ -7,6 +7,7 @@ import Login from "./userAuth/Login";
 import Register from "./userAuth/Register";
 import Account from "./userAuth/Account";
 import { userLogout } from "../actions/userActions";
+import NotesContainer from "./notes/NotesContainer";
 
 const NavBar = (props) => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const NavBar = (props) => {
           <React.Fragment>
             <li>
               <Link to="/account">Account</Link>
+            </li>
+            <li>
+              <Link to="/mynotes">My Notes</Link>
             </li>
             <li>
               <Link to="/logout" onClick={handleLogout}>
@@ -51,6 +55,7 @@ const NavBar = (props) => {
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route path="/logout" element={<Navigate replace to="/" />} />
+        <Route path="/mynotes" element={<NotesContainer />} />
       </Routes>
     </div>
   );
