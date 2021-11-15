@@ -96,3 +96,26 @@ const deleteNoteSuccess = (note) => {
     payload: note,
   };
 };
+
+export const startEditNote = (editedNote, _id, handleToggle) => {
+  return (dispatch) => {
+    axios
+      .put(`https://dct-user-auth.herokuapp.com/api/notes/${_id}`, editedNote, {
+        headers: {
+          "x-auth": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        dispatch(editNoteSuccess(response.data));
+        handleToggle();
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+const editNoteSuccess = (editedNote) => {
+  return {
+    type: "EDIT_NOTE_SUCCESS",
+    payload: editedNote,
+  };
+};

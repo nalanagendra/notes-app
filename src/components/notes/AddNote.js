@@ -1,11 +1,20 @@
 import React from "react";
 import NoteForm from "./NoteForm";
+import { useDispatch } from "react-redux";
+
+import { startAddNote } from "../../actions/notesActions";
 
 const AddNote = (props) => {
+  const dispatch = useDispatch();
+
+  const formSubmit = (values, resetForm) => {
+    dispatch(startAddNote(values, resetForm));
+  };
+
   return (
     <div>
       <h2>Add Note</h2>
-      <NoteForm />
+      <NoteForm formSubmit={formSubmit} />
     </div>
   );
 };

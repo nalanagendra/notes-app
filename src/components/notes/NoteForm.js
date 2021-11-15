@@ -1,26 +1,23 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
-
-import { startAddNote } from "../../actions/notesActions";
-
-const initialValues = {
-  title: "",
-  body: "",
-};
+import { useSelector } from "react-redux";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Required!"),
 });
 
 const NoteForm = (props) => {
-  const dispatch = useDispatch();
+  const { formSubmit, title: editTitle, body: editBody } = props;
   const message = useSelector((state) => state.notes.message);
   const errorMessage = useSelector((state) => state.notes.errorMessage);
+  const initialValues = {
+    title: editTitle ? editTitle : "",
+    body: editBody ? editBody : "",
+  };
 
   const onSubmit = (values, { resetForm }) => {
-    dispatch(startAddNote(values, resetForm));
+    formSubmit(values, resetForm);
   };
 
   return (

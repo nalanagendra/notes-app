@@ -79,6 +79,20 @@ const notesReducer = (state = initialNotesState, action) => {
       };
     }
 
+    case "EDIT_NOTE_SUCCESS": {
+      const updatedNotes = state.notes.map((note) => {
+        if (note._id === action.payload._id) {
+          return { ...action.payload };
+        }
+        return { ...note };
+      });
+      return {
+        ...state,
+        notes: [...updatedNotes],
+        errorMessage: "",
+      };
+    }
+
     default: {
       return {
         notes: [...state.notes],

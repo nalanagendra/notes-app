@@ -21,7 +21,12 @@ const NoteItem = (props) => {
     <div>
       {editToggle ? (
         <div>
-          <EditNote />
+          <EditNote
+            _id={_id}
+            title={title}
+            body={body}
+            handleToggle={handleToogle}
+          />
           <button onClick={handleToogle}>Cancel</button>
         </div>
       ) : (
