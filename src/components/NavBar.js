@@ -6,6 +6,7 @@ import Home from "./Home"
 import Login from "./userAuth/Login"
 import Register from "./userAuth/Register"
 import Account from "./userAuth/Account"
+import ProtectedRoute from "./userAuth/ProtectedRoute"
 import { userLogout } from "../actions/userActions"
 import NotesContainer from "./notes/NotesContainer"
 
@@ -53,9 +54,9 @@ const NavBar = (props) => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
         <Route path="/logout" element={<Navigate replace to="/" />} />
-        <Route path="/mynotes" element={<NotesContainer />} />
+        <Route path="/mynotes" element={<ProtectedRoute><NotesContainer /></ProtectedRoute>} />
       </Routes>
     </div>
   )
