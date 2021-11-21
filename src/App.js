@@ -1,4 +1,4 @@
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar"
 
 function App() {
   return (
@@ -6,7 +6,7 @@ function App() {
       <h1>Notes App</h1>
       <NavBar />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

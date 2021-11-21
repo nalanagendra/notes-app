@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
-import NoteItem from "./NoteItem";
-import { startGetNotes } from "../../actions/notesActions";
+import NoteItem from "./NoteItem"
+import { startGetNotes } from "../../actions/notesActions"
 
 const NoteList = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const notes = useSelector((state) =>
     state.notes.notes.map((note) => {
-      return { ...note };
+      return { ...note }
     })
-  );
-  const isLoading = useSelector((state) => state.notes.isLoading);
-  const errorMessage = useSelector((state) => state.notes.errorMessage);
-  const message = useSelector((state) => state.notes.message);
+  )
+  const isLoading = useSelector((state) => state.notes.isLoading)
+  const errorMessage = useSelector((state) => state.notes.errorMessage)
+  const message = useSelector((state) => state.notes.message)
 
   useEffect(() => {
-    dispatch(startGetNotes());
-  }, []);
+    dispatch(startGetNotes())
+  }, [])
 
   return (
     <div>
@@ -32,7 +32,7 @@ const NoteList = (props) => {
         <div>{errorMessage}</div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NoteList;
+export default NoteList

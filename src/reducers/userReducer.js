@@ -4,7 +4,7 @@ const initialUsersData = {
   message: "",
   isLoggedIn: false,
   data: {},
-};
+}
 
 const userReducer = (state = initialUsersData, action) => {
   switch (action.type) {
@@ -14,7 +14,7 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: "",
         isLoading: true,
         message: "Logging in...",
-      };
+      }
     }
 
     case "USER_LOGIN_SUCCESS": {
@@ -24,7 +24,7 @@ const userReducer = (state = initialUsersData, action) => {
         isLoading: false,
         message: "Login Successful",
         isLoggedIn: true,
-      };
+      }
     }
 
     case "USER_LOGIN_ERROR": {
@@ -33,18 +33,18 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: action.payload,
         isLoading: false,
         message: "",
-      };
+      }
     }
 
     case "USER_LOGOUT": {
-      localStorage.removeItem("token");
+      localStorage.removeItem("token")
       return {
         ...state,
         isLoading: false,
         errorMessage: "",
         message: "Loggedout successfully",
         isLoggedIn: false,
-      };
+      }
     }
 
     case "USER_REGISTER_REQUEST": {
@@ -54,7 +54,7 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: "",
         message: "Registering...",
         isLoggedIn: false,
-      };
+      }
     }
 
     case "USER_REGISTER_SUCCESS": {
@@ -64,7 +64,7 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: "",
         message: "Registered Successfully.",
         isLoggedIn: false,
-      };
+      }
     }
 
     case "USER_REGISTER_ERROR": {
@@ -74,7 +74,7 @@ const userReducer = (state = initialUsersData, action) => {
         errorMessage: action.payload,
         message: "",
         isLoggedIn: false,
-      };
+      }
     }
 
     case "FETCH_ACCOUNT_INFO_REQUEST": {
@@ -83,7 +83,7 @@ const userReducer = (state = initialUsersData, action) => {
         isLoading: true,
         message: "",
         errorMessage: "",
-      };
+      }
     }
 
     case "FETCH_ACCOUNT_INFO_SUCCESS": {
@@ -93,7 +93,7 @@ const userReducer = (state = initialUsersData, action) => {
         message: "Account information loaded successfully",
         errorMessage: "",
         data: { ...action.payload },
-      };
+      }
     }
 
     case "FETCH_ACCOUNT_INFO_ERROR": {
@@ -103,7 +103,7 @@ const userReducer = (state = initialUsersData, action) => {
         message: "",
         errorMessage: action.payload,
         data: {},
-      };
+      }
     }
 
     default: {
@@ -111,11 +111,11 @@ const userReducer = (state = initialUsersData, action) => {
         return {
           ...state,
           isLoggedIn: true,
-        };
+        }
       }
-      return { ...state };
+      return { ...state }
     }
   }
-};
+}
 
-export default userReducer;
+export default userReducer

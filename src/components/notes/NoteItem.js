@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 
-import EditNote from "./EditNote";
-import { startDeleteNote } from "../../actions/notesActions";
+import EditNote from "./EditNote"
+import { startDeleteNote } from "../../actions/notesActions"
 
 const NoteItem = (props) => {
-  const { title, body, _id } = props;
-  const [editToggle, setEditToggle] = useState(false);
-  const dispatch = useDispatch();
+  const { title, body, _id } = props
+  const [editToggle, setEditToggle] = useState(false)
+  const dispatch = useDispatch()
 
   const handleToogle = () => {
-    setEditToggle(!editToggle);
-  };
+    setEditToggle(!editToggle)
+  }
 
   const handleDeleteNote = () => {
-    dispatch(startDeleteNote(_id));
-  };
+    dispatch(startDeleteNote(_id))
+  }
 
   return (
     <div>
@@ -38,7 +38,7 @@ const NoteItem = (props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NoteItem;
+export default NoteItem

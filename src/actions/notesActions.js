@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from "axios"
 
 export const startAddNote = (noteData, resetForm) => {
   return (dispatch) => {
-    dispatch(addNoteRequest());
+    dispatch(addNoteRequest())
     axios
       .post("https://dct-user-auth.herokuapp.com/api/notes", noteData, {
         headers: {
@@ -10,37 +10,37 @@ export const startAddNote = (noteData, resetForm) => {
         },
       })
       .then((response) => {
-        dispatch(addNoteSuccess(response.data));
-        resetForm();
+        dispatch(addNoteSuccess(response.data))
+        resetForm()
       })
       .catch((error) => {
-        dispatch(addnoteError());
-      });
-  };
-};
+        dispatch(addnoteError())
+      })
+  }
+}
 
 const addNoteRequest = () => {
   return {
     type: "ADD_NOTE_REQUEST",
-  };
-};
+  }
+}
 
 const addNoteSuccess = (noteData) => {
   return {
     type: "ADD_NOTE_SUCCESS",
     payload: noteData,
-  };
-};
+  }
+}
 
 const addnoteError = () => {
   return {
     type: "ADD_NOTE_ERROR",
-  };
-};
+  }
+}
 
 export const startGetNotes = () => {
   return (dispatch) => {
-    dispatch(getNotesRequest());
+    dispatch(getNotesRequest())
     axios
       .get("https://dct-user-auth.herokuapp.com/api/notes", {
         headers: {
@@ -48,32 +48,32 @@ export const startGetNotes = () => {
         },
       })
       .then((response) => {
-        dispatch(getNotesSuccess(response.data));
+        dispatch(getNotesSuccess(response.data))
       })
       .catch((error) => {
-        dispatch(getNotesError());
-      });
-  };
-};
+        dispatch(getNotesError())
+      })
+  }
+}
 
 const getNotesRequest = () => {
   return {
     type: "GET_NOTES_REQUEST",
-  };
-};
+  }
+}
 
 const getNotesSuccess = (notes) => {
   return {
     type: "GET_NOTES_SUCCESS",
     payload: notes,
-  };
-};
+  }
+}
 
 const getNotesError = () => {
   return {
     type: "GET_NOTES_ERROR",
-  };
-};
+  }
+}
 
 export const startDeleteNote = (_id) => {
   return (dispatch) => {
@@ -84,18 +84,18 @@ export const startDeleteNote = (_id) => {
         },
       })
       .then((response) => {
-        dispatch(deleteNoteSuccess(response.data));
+        dispatch(deleteNoteSuccess(response.data))
       })
-      .catch((error) => {});
-  };
-};
+      .catch((error) => {})
+  }
+}
 
 const deleteNoteSuccess = (note) => {
   return {
     type: "DELETE_NOTE_SUCCESS",
     payload: note,
-  };
-};
+  }
+}
 
 export const startEditNote = (editedNote, _id, handleToggle) => {
   return (dispatch) => {
@@ -106,16 +106,16 @@ export const startEditNote = (editedNote, _id, handleToggle) => {
         },
       })
       .then((response) => {
-        dispatch(editNoteSuccess(response.data));
-        handleToggle();
+        dispatch(editNoteSuccess(response.data))
+        handleToggle()
       })
-      .catch((error) => console.log(error));
-  };
-};
+      .catch((error) => console.log(error))
+  }
+}
 
 const editNoteSuccess = (editedNote) => {
   return {
     type: "EDIT_NOTE_SUCCESS",
     payload: editedNote,
-  };
-};
+  }
+}

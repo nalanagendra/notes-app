@@ -1,21 +1,21 @@
-import React from "react";
-import { Link, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react"
+import { Link, Routes, Route, Navigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
-import Home from "./Home";
-import Login from "./userAuth/Login";
-import Register from "./userAuth/Register";
-import Account from "./userAuth/Account";
-import { userLogout } from "../actions/userActions";
-import NotesContainer from "./notes/NotesContainer";
+import Home from "./Home"
+import Login from "./userAuth/Login"
+import Register from "./userAuth/Register"
+import Account from "./userAuth/Account"
+import { userLogout } from "../actions/userActions"
+import NotesContainer from "./notes/NotesContainer"
 
 const NavBar = (props) => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 
   const handleLogout = () => {
-    dispatch(userLogout());
-  };
+    dispatch(userLogout())
+  }
 
   return (
     <div>
@@ -58,7 +58,7 @@ const NavBar = (props) => {
         <Route path="/mynotes" element={<NotesContainer />} />
       </Routes>
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

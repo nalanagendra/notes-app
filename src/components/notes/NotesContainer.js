@@ -1,6 +1,6 @@
-import React from "react";
-import AddNote from "./AddNote";
-import NoteList from "./NotesList";
+import React from "react"
+import AddNote from "./AddNote"
+import NoteList from "./NotesList"
 
 const NotesContainer = (props) => {
   return (
@@ -9,7 +9,7 @@ const NotesContainer = (props) => {
       <NoteList />
       <AddNote />
     </div>
-  );
-};
+  )
+}
 
-export default NotesContainer;
+export default NotesContainer

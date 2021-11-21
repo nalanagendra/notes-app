@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { createStore, combineReducers, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
 
-import userReducer from "../reducers/userReducer";
-import notesReducer from "../reducers/notesReducer";
+import userReducer from "../reducers/userReducer"
+import notesReducer from "../reducers/notesReducer"
 
 const configureStore = () => {
   const store = createStore(
@@ -11,9 +11,9 @@ const configureStore = () => {
       notes: notesReducer,
     }),
     applyMiddleware(thunk)
-  );
+  )
 
-  return store;
-};
+  return store
+}
 
-export default configureStore;
+export default configureStore
