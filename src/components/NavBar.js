@@ -1,5 +1,5 @@
-import React from "react"
-import { Link, Routes, Route, Navigate } from "react-router-dom"
+import React, { useState } from "react"
+import { NavLink, Routes, Route, Navigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import Home from "./Home"
@@ -13,6 +13,11 @@ import NotesContainer from "./notes/NotesContainer"
 const NavBar = (props) => {
   const dispatch = useDispatch()
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+
+  const handleNavCollapse = () => {
+    setIsNavCollapsed(!isNavCollapsed)
+  }
 
   const handleLogout = () => {
     dispatch(userLogout())
@@ -20,35 +25,45 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        {isLoggedIn ? (
-          <React.Fragment>
-            <li>
-              <Link to="/account">Account</Link>
-            </li>
-            <li>
-              <Link to="/mynotes">My Notes</Link>
-            </li>
-            <li>
-              <Link to="/logout" onClick={handleLogout}>
-                Logout
-              </Link>
-            </li>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </React.Fragment>
-        )}
-      </ul>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
+        <div className="container-fluid">
+          <NavLink className="navbar-brand" to="/">Notes App</NavLink>
+          <button className="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" onClick={handleNavCollapse}>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarNav">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/">Home</NavLink>
+              </li>
+              {isLoggedIn ? (
+                <React.Fragment>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/account">Account</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/mynotes">My Notes</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/logout" onClick={handleLogout}>
+                      Logout
+                    </NavLink>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/register">Register</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/login">Login</NavLink>
+                  </li>
+                </React.Fragment>
+              )}
+            </ul>
+          </div>
+        </div>
+      </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
