@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import Swal from 'sweetalert2'
 
 import EditNote from "./EditNote"
 import { startDeleteNote } from "../../actions/notesActions"
@@ -14,11 +15,24 @@ const NoteItem = (props) => {
   }
 
   const handleDeleteNote = () => {
-    dispatch(startDeleteNote(_id))
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      console.log(result.isConfirmed)
+      if (result.isConfirmed){
+        dispatch(startDeleteNote(_id))
+      }
+    })
   }
 
   return (
-    <div style={{"min-height": "17rem"}}>
+    <div style={{minHeight: "17rem"}}>
       {editToggle ? (
         <div className="border px-5">
           <EditNote

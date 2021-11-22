@@ -22,6 +22,7 @@ export const startAddNote = (noteData, resetForm) => {
 const addNoteRequest = () => {
   return {
     type: "ADD_NOTE_REQUEST",
+    payload: "Adding note."
   }
 }
 
@@ -35,6 +36,7 @@ const addNoteSuccess = (noteData) => {
 const addnoteError = () => {
   return {
     type: "ADD_NOTE_ERROR",
+    payload: "Unable to add note."
   }
 }
 
@@ -72,11 +74,13 @@ const getNotesSuccess = (notes) => {
 const getNotesError = () => {
   return {
     type: "GET_NOTES_ERROR",
+    payload: "Unanable to load notes."
   }
 }
 
 export const startDeleteNote = (_id) => {
   return (dispatch) => {
+    dispatch(deleteNoteRequest())
     axios
       .delete(`https://dct-user-auth.herokuapp.com/api/notes/${_id}`, {
         headers: {
@@ -86,7 +90,15 @@ export const startDeleteNote = (_id) => {
       .then((response) => {
         dispatch(deleteNoteSuccess(response.data))
       })
-      .catch((error) => {})
+      .catch((error) => {
+        dispatch(deleteNoteError())
+      })
+  }
+}
+
+const deleteNoteRequest = () => {
+  return {
+    type: "DELETE_NOTE_REQUEST"
   }
 }
 
@@ -97,8 +109,16 @@ const deleteNoteSuccess = (note) => {
   }
 }
 
+const deleteNoteError = () => {
+  return {
+    type: "DELETE_NOTE_ERROR",
+    payload: "Unable to delete note."
+  }
+}
+
 export const startEditNote = (editedNote, _id, handleToggle) => {
   return (dispatch) => {
+    dispatch(editNoteRequest())
     axios
       .put(`https://dct-user-auth.herokuapp.com/api/notes/${_id}`, editedNote, {
         headers: {
@@ -109,7 +129,16 @@ export const startEditNote = (editedNote, _id, handleToggle) => {
         dispatch(editNoteSuccess(response.data))
         handleToggle()
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        editNoteError()
+      })
+  }
+}
+
+const editNoteRequest = () => {
+  return {
+    type: "EDIT_NOTE_REQUEST",
+    payload: "Editing note."
   }
 }
 
@@ -117,5 +146,12 @@ const editNoteSuccess = (editedNote) => {
   return {
     type: "EDIT_NOTE_SUCCESS",
     payload: editedNote,
+  }
+}
+
+const editNoteError = () => {
+  return {
+    type: "EDIT_NOTE_ERROR",
+    payload: "Unable to edit note."
   }
 }

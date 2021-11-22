@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { startFetchAccountInfo } from "../../actions/userActions";
 import Loader from "../resusableComponents/Loader";
+import SuccessAlert from "../resusableComponents/SuccessAlert";
+import ErrorAlert from "../resusableComponents/ErrorAlert";
 
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -23,9 +25,9 @@ const Account = (props) => {
         <div className="col-md-6 col-lg-4">
           {isLoading && <Loader />} 
 
-          {message && <div className="text-center alert alert-success" role="alert">{message}</div> }
+          {message && <SuccessAlert>{message}</SuccessAlert> }
 
-          {errorMessage &&<div className="text-center alert alert-danger" role="alert" role="alert">{errorMessage}</div> }
+          {errorMessage && <ErrorAlert>{errorMessage}</ErrorAlert> }
 
           {(!isLoading && !errorMessage) && (
             <div className="card text-center">

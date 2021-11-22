@@ -7,31 +7,12 @@ const initialNotesState = {
 
 const notesReducer = (state = initialNotesState, action) => {
   switch (action.type) {
-    case "ADD_NOTE_REQUEST": {
-      return {
-        ...state,
-        message: "Adding note",
-        errorMessage: "",
-        isLoading: false,
-      }
-    }
-
     case "ADD_NOTE_SUCCESS": {
       return {
         ...state,
-        notes: [...state.notes, action.payload],
+        notes: [action.payload, ...state.notes],
         message: "Note added Successfully",
         errorMessage: "",
-        isLoading: false,
-      }
-    }
-
-    case "ADD_NOTE_ERROR": {
-      return {
-        ...state,
-        notes: [],
-        message: "",
-        errorMessage: "Something went wrong..",
         isLoading: false,
       }
     }
@@ -49,19 +30,9 @@ const notesReducer = (state = initialNotesState, action) => {
     case "GET_NOTES_SUCCESS": {
       return {
         ...state,
-        notes: [...action.payload],
+        notes: [...action.payload].reverse(),
         errorMessage: "",
-        message: "Notes loaded successfully",
-        isLoading: false,
-      }
-    }
-
-    case "GET_NOTES_ERROR": {
-      return {
-        ...state,
-        notes: [],
-        errorMessage: "Something went wrong",
-        message: "",
+        message: "Notes loaded successfully.",
         isLoading: false,
       }
     }
@@ -74,7 +45,7 @@ const notesReducer = (state = initialNotesState, action) => {
         ...state,
         notes: [...filteredNotes],
         errorMessage: "",
-        message: "",
+        message: "Note deleted successfully",
         isLoading: false,
       }
     }
@@ -90,6 +61,32 @@ const notesReducer = (state = initialNotesState, action) => {
         ...state,
         notes: [...updatedNotes],
         errorMessage: "",
+        message: "Note edited successfully."
+      }
+    }
+
+    //setting messaged during network request
+    case "ADD_NOTE_REQUEST":
+    case "DELETE_NOTE_REQUEST": 
+    case "EDIT_NOTE_REQUEST": {
+      return {
+        ...state,
+        message: action.payload,
+        errorMessage: ""
+      }
+    }
+
+    //setting error messages
+    case "ADD_NOTE_ERROR":
+    case "GET_NOTES_ERROR":
+    case "DELETE_NOTE_ERROR":
+    case "EDIT_NOTE_ERROR": {
+      return {
+        ...state,
+        notes: [],
+        message: "",
+        errorMessage: action.payload,
+        isLoading: false,
       }
     }
 

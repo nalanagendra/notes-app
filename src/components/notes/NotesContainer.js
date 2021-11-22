@@ -1,7 +1,9 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import MessageBox from "../resusableComponents/MessageBox"
 
+import MessageBox from "../resusableComponents/MessageBox"
+import ErrorAlert from "../resusableComponents/ErrorAlert"
+import SuccessAlert from "../resusableComponents/SuccessAlert"
 import AddNote from "./AddNote"
 import NoteList from "./NotesList"
 
@@ -16,12 +18,8 @@ const NotesContainer = (props) => {
       <h2 className="mt-4">Notes</h2>
 
       <MessageBox>
-        {((notesCount!==0) && message) && <div class="alert alert-success" role="alert">
-          {message} 
-        </div>}
-        {errorMessage && <div class="alert alert-danger" role="alert">
-          {errorMessage}
-        </div>}
+        {((notesCount!==0) && message) && <SuccessAlert>{message}</SuccessAlert>}
+        {errorMessage && <ErrorAlert>{errorMessage}</ErrorAlert>}
       </MessageBox>
 
 
