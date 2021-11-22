@@ -5,10 +5,18 @@ import heroImage from '../assets/hero.svg'
 import ErrorAlert from "./resusableComponents/ErrorAlert"
 import MessageBox from "./resusableComponents/MessageBox"
 import SuccessAlert from "./resusableComponents/SuccessAlert"
+import { clearUserMessage } from "../actions/userActions"
 
 const Home = (props) => {
   const message = useSelector((state) => state.user.message)
   const errorMessage = useSelector((state) => state.user.errorMessage)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearUserMessage())
+    }
+  }, [])
 
   return (
     <div className="container mt-1">

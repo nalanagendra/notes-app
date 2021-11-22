@@ -5,6 +5,7 @@ import { startFetchAccountInfo } from "../../actions/userActions";
 import Loader from "../resusableComponents/Loader";
 import SuccessAlert from "../resusableComponents/SuccessAlert";
 import ErrorAlert from "../resusableComponents/ErrorAlert";
+import { clearUserMessage } from "../../actions/userActions"
 
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const Account = (props) => {
 
   useEffect(() => {
     dispatch(startFetchAccountInfo());
+    return () => {
+      dispatch(clearUserMessage())
+    }
   }, []);
 
   return (

@@ -120,3 +120,9 @@ const fetchAccountInfoError = (errorMessage) => {
     payload: errorMessage,
   }
 }
+
+export const clearUserMessage = () => {
+  return {
+    type: "CLEAR_USER_MESSAGE"
+  }
+}

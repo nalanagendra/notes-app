@@ -12,7 +12,7 @@ const userReducer = (state = initialUsersData, action) => {
       return {
         ...state,
         errorMessage: "",
-        isLoading: true,
+        isLoading: false,
         message: "Logging in...",
       }
     }
@@ -27,15 +27,7 @@ const userReducer = (state = initialUsersData, action) => {
       }
     }
 
-    case "USER_LOGIN_ERROR": {
-      return {
-        ...state,
-        errorMessage: action.payload,
-        isLoading: false,
-        message: "",
-      }
-    }
-
+    //during logout remove token from local storage
     case "USER_LOGOUT": {
       localStorage.removeItem("token")
       return {
@@ -67,16 +59,6 @@ const userReducer = (state = initialUsersData, action) => {
       }
     }
 
-    case "USER_REGISTER_ERROR": {
-      return {
-        ...state,
-        isLoading: false,
-        errorMessage: action.payload,
-        message: "",
-        isLoggedIn: false,
-      }
-    }
-
     case "FETCH_ACCOUNT_INFO_REQUEST": {
       return {
         ...state,
@@ -96,6 +78,9 @@ const userReducer = (state = initialUsersData, action) => {
       }
     }
 
+    //grouped all the errors
+    case "USER_REGISTER_ERROR":
+    case "USER_LOGIN_ERROR":
     case "FETCH_ACCOUNT_INFO_ERROR": {
       return {
         ...state,
@@ -103,6 +88,14 @@ const userReducer = (state = initialUsersData, action) => {
         message: "",
         errorMessage: action.payload,
         data: {},
+      }
+    }
+
+    case "CLEAR_USER_MESSAGE": {
+      return {
+        ...state,
+        message: "",
+        errorMessage: ""
       }
     }
 
