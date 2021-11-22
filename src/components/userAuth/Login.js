@@ -5,6 +5,9 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 import { startUserLogin } from "../../actions/userActions";
+import TextError from "../resusableComponents/TextError";
+import InputBox from "../resusableComponents/InputBox";
+import MessageBox from "../resusableComponents/MessageBox";
 
 const initialValues = {
   email: "",
@@ -31,27 +34,33 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {message && <div>{message}</div>}
-      {errorMessage && <div>{errorMessage}</div>}
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        <Form>
-          <Field name="email" placeholder="Enter email" />
-          <br />
-          <ErrorMessage name="email" />
-          <br />
-          <Field name="password" type="password" placeholder="Enter password" />
-          <br />
-          <ErrorMessage name="password" />
-          <br />
-          <button type="submit">Login</button>
-        </Form>
-      </Formik>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6 offset-sm-3">
+          <h2 className="h3 mb-4">Login</h2>
+          <MessageBox>
+            {message && <div>{message}</div>}
+            {errorMessage && <div className="text-danger">{errorMessage}</div>}
+          </MessageBox>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            >
+            <Form>
+              <InputBox>
+                <Field name="email" placeholder="Enter email" />
+                <ErrorMessage name="email" component={TextError} />
+              </InputBox>
+              <InputBox>
+                <Field name="password" type="password" placeholder="Enter password" />
+                <ErrorMessage name="password" component={TextError} />
+              </InputBox>
+              <button className="btn btn-primary" type="submit">Login</button>
+            </Form>
+          </Formik>
+        </div>
+      </div>
     </div>
   );
 };
