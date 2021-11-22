@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import NoteItem from "./NoteItem"
 import { startGetNotes } from "../../actions/notesActions"
+import Loader from "../resusableComponents/Loader"
 
 const NoteList = (props) => {
   const dispatch = useDispatch()
@@ -13,7 +14,6 @@ const NoteList = (props) => {
   )
   const isLoading = useSelector((state) => state.notes.isLoading)
   const errorMessage = useSelector((state) => state.notes.errorMessage)
-  const message = useSelector((state) => state.notes.message)
 
   useEffect(() => {
     dispatch(startGetNotes())
@@ -21,15 +21,12 @@ const NoteList = (props) => {
 
   return (
     <div>
-      {isLoading ? <div>Loading ...</div> : null}
-      {message && <div>{message}</div>}
-      {!isLoading && notes.length === 0 && (
-        <div>Please add your first note</div>
+      {isLoading ? <Loader /> : null}
+      {(!errorMessage && !isLoading && notes.length === 0) && (
+        <div className="h4">No notes to show. Please add your first note. </div>
       )}
-      {!errorMessage && !isLoading ? (
+      {(!errorMessage && !isLoading) && (
         notes.map((note) => <NoteItem key={note._id} {...note} />)
-      ) : (
-        <div>{errorMessage}</div>
       )}
     </div>
   )

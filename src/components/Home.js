@@ -7,7 +7,7 @@ const Home = (props) => {
     <div className="container">
       <div className="row align-items-center"> 
         <div className="col-md">
-          <img  src={heroImage} alt="hero-image" />
+          <img  src={heroImage} alt="user taking notes" />
         </div>
         <div className="col-md">
           <h1 className="display-4">Notes app</h1>

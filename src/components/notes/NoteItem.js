@@ -18,23 +18,25 @@ const NoteItem = (props) => {
   }
 
   return (
-    <div>
+    <div style={{"min-height": "17rem"}}>
       {editToggle ? (
-        <div>
+        <div className="border px-5">
           <EditNote
             _id={_id}
             title={title}
             body={body}
             handleToggle={handleToogle}
           />
-          <button onClick={handleToogle}>Cancel</button>
+          <button className="btn btn-primary align-self-start" onClick={handleToogle}>Cancel</button>
         </div>
       ) : (
-        <div>
-          <h3>{title}</h3>
-          <p>{body}</p>
-          <button onClick={handleToogle}>Edit</button>
-          <button onClick={handleDeleteNote}>Delete</button>
+        <div className="card">
+          <div className="card-body p-5">
+            <h3 className="card-title">{title}</h3>
+            <p className="card-text">{body}</p>
+            <button className="btn btn-outline-primary mr-3" onClick={handleToogle}>Edit</button>
+            <button className="btn btn-primary" onClick={handleDeleteNote}>Delete</button>
+          </div>
         </div>
       )}
     </div>

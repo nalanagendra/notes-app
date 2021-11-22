@@ -2,7 +2,7 @@ import React from 'react'
 
 const MessageBox = (props) => {
     return(
-        <div style={{height: "25px"}}>
+        <div style={{height: "50px"}}>
             {props.children}
         </div>
     )

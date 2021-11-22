@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { startFetchAccountInfo } from "../../actions/userActions";
-import MessageBox from "../resusableComponents/MessageBox";
+import Loader from "../resusableComponents/Loader";
 
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -21,14 +21,7 @@ const Account = (props) => {
     <div className="container mt-5">
       <div className="row align-items-center justify-content-center">
         <div className="col-md-6 col-lg-4">
-          {isLoading && (
-            <div className="text-center"> 
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-              <div><strong>Loading...</strong></div>
-            </div>
-          )} 
+          {isLoading && <Loader />} 
 
           {message && <div className="text-center alert alert-success" role="alert">{message}</div> }
 

@@ -12,10 +12,10 @@ const EditNote = (props) => {
   }
 
   return (
-    <div>
-      <h3>Edit Note</h3>
+    <React.Fragment>
+      <h3 className="h4">Edit Note</h3>
       <NoteForm {...props} formSubmit={formSubmit} />
-    </div>
+    </React.Fragment>
   )
 }
 
