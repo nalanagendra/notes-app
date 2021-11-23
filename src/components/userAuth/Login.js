@@ -12,8 +12,8 @@ import SuccessAlert from "../resusableComponents/SuccessAlert"
 import ErrorAlert from "../resusableComponents/ErrorAlert"
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: "testuser3@gmail.com",
+  password: "secret123",
 }
 
 const validationSchema = Yup.object({
