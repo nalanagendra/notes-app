@@ -1,6 +1,6 @@
 # Notes App
 
-This app is useful for taking short notes and edit the existing notes.
+This app is useful for taking short notes and edit/delete the existing notes.
 
 ## 🛠  Tech stack - (React)
 - 💻  Javascipt | ES6
