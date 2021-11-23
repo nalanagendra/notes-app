@@ -98,7 +98,8 @@ export const startDeleteNote = (_id) => {
 
 const deleteNoteRequest = () => {
   return {
-    type: "DELETE_NOTE_REQUEST"
+    type: "DELETE_NOTE_REQUEST",
+    payload: "Deleting note."
   }
 }
 
