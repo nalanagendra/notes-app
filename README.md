@@ -1,5 +1,5 @@
 # Notes App
-
+## [LIVEDEMO](https://vigilant-euclid-2df6f9.netlify.app/)
 This app is useful for taking short notes and edit/delete the existing notes.
 
 ## 🛠  Tech stack - (React)
